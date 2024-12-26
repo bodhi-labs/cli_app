@@ -1,15 +1,20 @@
+mod welcome;
+mod serve;
+
 use clap::{ArgMatches, Command};
 
 pub fn configure(command: Command) -> Command{
     command
-        .subcommand(Command::new("welcome")
-        .about("Welcome to 🦀 Cli!"))
+        .subcommand(welcome::configure())
+        .subcommand(serve::configure())
+        .arg_required_else_help(true)
 }
 
 pub fn handle(matches: &ArgMatches) -> anyhow::Result<()> {
     if let Some((cmd, _matches)) = matches.subcommand(){
         match cmd{
-            "welcome" => { println!("Welcome to 🦀 Cli!");},
+            welcome::COMMAND_NAME => welcome::handle(matches)?,
+            serve::COMMAND_NAME => serve::handle(matches)?,
             &_ => {}
 
         }
