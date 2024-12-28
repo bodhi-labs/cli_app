@@ -21,17 +21,7 @@ pub fn main() -> anyhow::Result<()>{
 
     // parses the command line 
     let matches = command.get_matches();
-    /*
-    let config_location = matches
-        .get_one::<String>("config")
-        .map(|s| s.as_str())
-        .unwrap_or(None);
-    // Alternative
-    let config_location = matches
-        .get_one("config")
-        .map(|s: &String| Some(s.as_str()))
-        .unwrap_or(None);
-    */
+    
     let config_location = matches
         .get_one("config")
         .map(|s: &String| Some(s.as_str()))
@@ -41,7 +31,19 @@ pub fn main() -> anyhow::Result<()>{
 
     commands::handle(&matches, &settings)?;
 
-    println!(
+    
+    
+
+
+    Ok(())
+}
+
+// One more trick: it's usually useful to arrange the crate 
+// to contain both a lib.rs and a main.rs file.
+// It will contain both a library and a binary at the same time.
+// This can make testing, benchmarking easier later.
+
+/*println!(
         "db url: {}",
         settings
             .database
@@ -52,13 +54,4 @@ pub fn main() -> anyhow::Result<()>{
     println!(
         "log level: {}",
         settings.logging.log_level.unwrap_or("info".to_string())
-    );
-
-
-    Ok(())
-}
-
-// One more trick: it's usually useful to arrange the crate 
-// to contain both a lib.rs and a main.rs file.
-// It will contain both a library and a binary at the same time.
-// This can make testing, benchmarking easier later.
+    ); */

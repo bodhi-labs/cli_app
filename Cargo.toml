@@ -9,3 +9,5 @@ anyhow = "1"
 config = "0.14"
 dotenv = "0.15"
 serde = { version = "1", features = ["derive"] }
+axum = "0.7.9"
+tokio = { version = "1.42.0", features = ["full"] }
